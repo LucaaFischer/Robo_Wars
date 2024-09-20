@@ -8,35 +8,55 @@ public class avatar {
     public static void main(String[] args) {
         Scanner input_avatar = new Scanner(System.in);
         System.out.println("Wähle einen Avatar. 1, 2 oder 3");
-        String avatar = input_avatar.nextLine();
+        int avatar = input_avatar.nextInt();
 
         String[] robo1 = {
                 "  _____  ",
                 " /     \\ ",
-                " | () () |",
+                " | () ()|",
                 " \\  ^  / ",
                 "  ||||| ",
                 "  ||||| "
         };
 
         String[] robo2 = {
-                "/     \\  ",
+                "   ____ ",
+                " /     \\  ",
                 "|  O O  | ",
                 "|   ^   |",
-                "\\_____/ ",
+                " \\_____/ ",
                 "  || ||  ",
                 "  || ||  "
         };
 
         String[] robo3 = {
-
+                "   _____   ",
+                "  /    \\ ",
+                " |  @ @  | ",
+                " |   ~   | ",
+                "  \\_____/  ",
+                "    || ||    ",
+                "    || ||    ",
         };
-        while (avatar.length() < 3 || avatar.length() > 8) {
-            System.out.println("Avatar leider nicht zulässig :(");
-            System.out.println("Erstelle dir erneut einen Avatar mit ASCII-Zeichen");
-            avatar = input_avatar.nextLine();
+
+        System.out.println("Dein Avatar: ");
+        int i = 0;
+        if(avatar == 1) {
+            while (i < robo1.length) {
+                System.out.println(robo1[i]);
+                i++;
+            };
+        } else if (avatar == 2) {
+            while (i < robo2.length) {
+                System.out.println(robo2[i]);
+                i++;
+            }
+        } else if(avatar == 3) {
+            while (i < robo3.length) {
+                System.out.println(robo3[i]);
+                i++;
+            }
         }
-        System.out.println("Dein Avatar: " + avatar);
         System.out.println();
         System.out.println("Viel Spaß beim Spiel! :)");
     }
