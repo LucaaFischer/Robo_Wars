@@ -18,26 +18,25 @@ public class Main {
 
 
         // Namenseingabe
-        Scanner inputName = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         System.out.println("Bitte gib deinen gewünschten Benutzernamen ein");
-        String username = inputName.nextLine();
+        String username = input.nextLine();
 
         while (username.length() < 4 || username.length() > 16) {
             System.out.println("Der eingegebene Name ist unzulässig.");
-            username = inputName.nextLine();
+            username = input.nextLine();
         }
         System.out.println("Willkommen zu ROBOT-WARS " + username + "!!!");
 
 
         //Avatarerstellung
-        Scanner input_avatar = new Scanner(System.in);
         System.out.println("Wähle ein Zeichen als Avatar");
-        String avatar = input_avatar.nextLine();
+        String avatar = input.nextLine();
 
-        while(avatar.length() > 1) {
+        while (avatar.length() > 1) {
             System.out.println("Dein Avatar darf nur ein Zeichen sein");
             System.out.println("Bitte gib erneut ein Zeichen als Avatar ein");
-            avatar = input_avatar.nextLine();
+            avatar = input.nextLine();
         }
         System.out.println("Dein Avatar: " + avatar);
 
@@ -45,22 +44,29 @@ public class Main {
         //Spielbretterstellung und erste Positionierung des Roboters.
         int y = 0;
         int x = 0;
-        int roboty = 7;
-        int robotx = 9;
+        int maxZuege = 0;
 
-        while (y < 15) {
-            x = 0;
-            while (x < 15) {
-                if (x == robotx && y == roboty) {
-                    System.out.print(" [ " + avatar + " ] ");
-                } else {
-                    System.out.print(" [   ] ");
+        while(maxZuege <= 100) {
+            System.out.println("Wo möchtest du deinen Roboter platzieren? X-Koordinate");
+            int roboX = input.nextInt();
+            System.out.println("Und die Y-Koordinate?");
+            int roboY = input.nextInt();
+
+            while (y <= 15) {
+                x = 0;
+                while (x <= 15) {
+                    if (x == roboX && y == roboY) {
+                        System.out.print(" [ " + avatar + " ] ");
+                    } else {
+                        System.out.print(" [   ] ");
+                    }
+                    x++;
                 }
-                x++;
+                System.out.println();
+                System.out.println();
+                y++;
             }
-            System.out.println();
-            System.out.println();
-            y++;
+            maxZuege++;
         }
     }
 }
