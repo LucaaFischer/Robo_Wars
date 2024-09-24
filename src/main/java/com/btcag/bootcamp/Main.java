@@ -66,6 +66,7 @@ public class Main {
                 System.out.println();
                 y++;
             }
+            System.out.println("Dein Roboter befindet sich auf Feld x " + roboX + " y " + roboY + ".");
             maxZuege++;
         }
     }
