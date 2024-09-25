@@ -42,8 +42,8 @@ public class Main {
 
 
         //Spielbretterstellung und erste Positionierung des Roboters.
-        int y = 0;
-        int x = 0;
+        int y = 1;
+        int x = 1;
         int maxZuege = 0;
 
         while(maxZuege <= 100) {
@@ -53,7 +53,7 @@ public class Main {
             int roboY = input.nextInt();
 
             while (y <= 15) {
-                x = 0;
+                x = 1;
                 while (x <= 15) {
                     if (x == roboX && y == roboY) {
                         System.out.print(" [ " + avatar + " ] ");
