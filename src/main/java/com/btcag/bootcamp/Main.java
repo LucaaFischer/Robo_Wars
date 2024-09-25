@@ -19,54 +19,88 @@ public class Main {
 
         // Namenseingabe
         Scanner input = new Scanner(System.in);
-        System.out.println("Bitte gib deinen gewünschten Benutzernamen ein");
-        String username = input.nextLine();
+        System.out.println("Bitte gib deinen gewünschten Benutzernamen ein, Spieler 1.");
+        String playerOne = input.nextLine();
 
-        while (username.length() < 4 || username.length() > 16) {
+        while (playerOne.length() < 4 || playerOne.length() > 16) {
             System.out.println("Der eingegebene Name ist unzulässig.");
-            username = input.nextLine();
+            playerOne = input.nextLine();
         }
-        System.out.println("Willkommen zu ROBOT-WARS " + username + "!!!");
+
+        System.out.println("Bitte gib deinen gewünschten Benutzernamen ein, Spieler 2.");
+        String playerTwo = input.nextLine();
+
+        while (playerTwo.length() < 4 || playerTwo.length() > 16) {
+            System.out.println("Der eingegebene Name ist unzulässig.");
+            playerTwo = input.nextLine();
+        }
+
+        System.out.println("WILLKOMMEN ZU ROBOT-WARS " + playerOne.toUpperCase() + " UND " + playerTwo.toUpperCase() + " !!!");
 
 
         //Avatarerstellung
-        System.out.println("Wähle ein Zeichen als Avatar");
-        String avatar = input.nextLine();
+        System.out.println("Wähle ein Zeichen als Avatar, " + playerOne);
+        String avatarPlayerOne = input.nextLine();
 
-        while (avatar.length() > 1) {
+        while (avatarPlayerOne.length() > 1) {
             System.out.println("Dein Avatar darf nur ein Zeichen sein");
             System.out.println("Bitte gib erneut ein Zeichen als Avatar ein");
-            avatar = input.nextLine();
+            avatarPlayerOne = input.nextLine();
         }
-        System.out.println("Dein Avatar: " + avatar);
+
+        System.out.println("Wähle ein Zeichen als Avatar, " + playerTwo);
+        String avatarPlayerTwo = input.nextLine();
+
+        while (avatarPlayerTwo.length() > 1) {
+            System.out.println("Dein Avatar darf nur ein Zeichen sein");
+            System.out.println("Bitte gib erneut ein Zeichen als Avatar ein");
+            avatarPlayerTwo = input.nextLine();
+        }
+
+        System.out.println("Dein Avatar " + playerOne + ": " + avatarPlayerOne);
+        System.out.println("Dein Avatar " + playerTwo + ": " + avatarPlayerTwo);
 
 
-        //Spielbretterstellung und erste Positionierung des Roboters.
+        //Spielbretterstellung und Positionierung des Roboters.
         int y = 1;
         int x = 1;
         int maxZuege = 0;
+        int roboOneX = 0;
+        int roboOneY = 0;
+        int roboTwoX = 0;
+        int roboTwoY = 0;
 
-        while(maxZuege <= 100) {
-            System.out.println("Wo möchtest du deinen Roboter platzieren? X-Koordinate");
-            int roboX = input.nextInt();
-            System.out.println("Und die Y-Koordinate?");
-            int roboY = input.nextInt();
-
+        while (maxZuege <= 100) {
+            if (maxZuege % 2 == 0) {
+                System.out.println("Wo möchtest du deinen Roboter platzieren, " + playerOne + "? x-Koordinate:");
+                roboOneX = input.nextInt();
+                System.out.println("Und die Y-Koordinate?");
+                roboOneY = input.nextInt();
+            } else {
+                System.out.println("Wo möchtest du deinen Roboter platzieren, " + playerTwo + "? x-Koordinate:");
+                roboTwoX = input.nextInt();
+                System.out.println("Und die Y-Koordinate?");
+                roboTwoY = input.nextInt();
+            }
+            y = 0;
             while (y <= 15) {
                 x = 1;
                 while (x <= 15) {
-                    if (x == roboX && y == roboY) {
-                        System.out.print(" [ " + avatar + " ] ");
-                    } else {
-                        System.out.print(" [   ] ");
+                        if (x == roboOneX && y == roboOneY) {
+                            System.out.print(" [ " + avatarPlayerOne + " ] ");
+                        } else if (x == roboTwoX && y == roboTwoY) {
+                            System.out.print(" [ " + avatarPlayerTwo + " ] ");
+                        } else {
+                            System.out.print(" [   ] ");
+                        }
+                        x++;
                     }
-                    x++;
-                }
                 System.out.println();
                 System.out.println();
                 y++;
             }
-            System.out.println("Dein Roboter befindet sich auf Feld x " + roboX + " y " + roboY + ".");
+            System.out.println(playerOne + "'s Roboter (" + avatarPlayerOne + ") befindet sich auf Feld x " + roboOneX + " y " + roboOneY + ".");
+            System.out.println(playerTwo + "'s Roboter (" + avatarPlayerTwo + ") befindet sich auf Feld x " + roboTwoX + " y " + roboTwoY + ".");
             maxZuege++;
         }
     }
