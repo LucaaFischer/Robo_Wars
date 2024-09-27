@@ -4,83 +4,81 @@ import java.util.Scanner;
 
 public class Main {
     public static Scanner input = new Scanner(System.in);
-    public static String playerOne = "";
-    public static String playerTwo = "";
-    public static String[] avatars = new String[2];
+    public static String[] players = getPlayers();
+    public static String[] avatars = getAvatars();
 
     public static void main(String[] args) {
+        String introString = intro();
+        System.out.println(introString);
 
-        System.out.println(intro());
+        System.out.println("WILLKOMMEN ZU ROBOT-WARS " + players[0].toUpperCase() + " UND " + players[1].toUpperCase() + " !!!");
 
-        System.out.println("WILLKOMMEN ZU ROBOT-WARS " + getPlayerOne().toUpperCase() + " UND " + getPlayerTwo().toUpperCase() + " !!!");
+        System.out.println("Dein Avatar " + players[0] + ": " + avatars[0]);
 
-        System.out.println("Dein Avatar " + playerOne + ": " + getAvatars()[0]);
-
-        System.out.println("Dein Avatar " + playerTwo + ": " + avatars[1]);
+        System.out.println("Dein Avatar " + players[1] + ": " + avatars[1]);
 
         board();
     }
 
-
+    //--------------------------------------------------------------------ASCII-Art Intro-------------------------------------------------------------------------------------
     public static String intro() {
-        String introString = ("Welcome to Robot Wars!!!\n" +
-                "  _____\n" +
-                " /     \\\n" +
-                "|  O O  |\n" +
-                "|   ^   |\n" +
-                " \\_____/\n" +
-                "  || ||\n" +
-                "  || ||\n");
+        return (
+                        "  _____\n" +
+                        " /     \\\n" +
+                        "|  O O  |\n" +
+                        "|   ^   |\n" +
+                        " \\_____/\n" +
+                        "  || ||\n" +
+                        "  || ||\n");
 
-        return introString;
+
     }
 
-    // Namenseingabe
-    public static String getPlayerOne() {
+    // ---------------------------------------------------------------- Namenseingabe---------------------------------------------------------------------------------
+    public static String[] getPlayers() {
+        String[] players = new String[2];
         System.out.println("Bitte gib deinen gewünschten Benutzernamen ein, Spieler 1.");
-        playerOne = input.nextLine();
+        players[0] = input.nextLine();
 
-        while (playerOne.length() < 4 || playerOne.length() > 16) {
+        while (players[0].length() < 4 || players[0].length() > 16) {
             System.out.println("Der eingegebene Name ist unzulässig.");
-            playerOne = input.nextLine();
+            players[0] = input.nextLine();
         }
-        return playerOne;
-    }
 
-    public static String getPlayerTwo() {
         System.out.println("Bitte gib deinen gewünschten Benutzernamen ein, Spieler 2.");
-        playerTwo = input.nextLine();
+        players[1] = input.nextLine();
 
-        while (playerTwo.length() < 4 || playerTwo.length() > 16) {
+        while (players[1].length() < 4 || players[1].length() > 16) {
             System.out.println("Der eingegebene Name ist unzulässig.");
-            playerTwo = input.nextLine();
+            players[1] = input.nextLine();
         }
-        return playerTwo;
+        return players;
     }
 
-    //Avatarerstellung
+    //------------------------------------------------------------------------Avatarerstellung--------------------------------------------------------------
     public static String[] getAvatars() {
-        System.out.println("Wähle ein Zeichen als Avatar, " + playerOne);
-        avatars[0] = input.next();
+        String[] avatars = new String[2];
+        System.out.println("Wähle ein Zeichen als Avatar, " + players[0]);
+        avatars[0] = input.nextLine();
 
-        while (avatars[0].length() > 1) {
-            System.out.println("Dein Avatar darf nur ein Zeichen sein");
-            System.out.println("Bitte gib erneut ein Zeichen als Avatar ein");
+        while (avatars[0].length() != 1) {
+            System.out.println("Dein Avatar muss ein Zeichen lang sein");
+            System.out.println("Bitte gib erneut einen Avatar ein");
             avatars[0] = input.nextLine();
         }
 
-        System.out.println("Wähle ein Zeichen als Avatar, " + playerTwo);
+        System.out.println("Wähle ein Zeichen als Avatar, " + players[1]);
         avatars[1] = input.nextLine();
 
-        while (avatars[1].length() > 1) {
-            System.out.println("Dein Avatar darf nur ein Zeichen sein");
-            System.out.println("Bitte gib erneut ein Zeichen als Avatar ein");
+        while (avatars[1].length() != 1) {
+            System.out.println("Dein Avatar muss ein Zeichen  lang sein");
+            System.out.println("Bitte gib erneut einen Avatar ein");
             avatars[1] = input.nextLine();
         }
         return avatars;
     }
 
-    //Spielbretterstellung und Positionierung des Roboters.
+    //----------------------------------------------------------Spielbretterstellung und Positionierung des Roboters.-----------------------------------------------------
     public static void board() {
         int y = 1;
         int x = 1;
@@ -92,12 +90,12 @@ public class Main {
 
         while (maxZuege <= 100) {
             if (maxZuege % 2 == 0) {
-                System.out.println("Wo möchtest du deinen Roboter platzieren, " + playerOne + "? x-Koordinate:");
+                System.out.println("Wo möchtest du deinen Roboter platzieren, " + players[0] + "? x-Koordinate:");
                 roboOneX = input.nextInt();
                 System.out.println("Und die Y-Koordinate?");
                 roboOneY = input.nextInt();
             } else {
-                System.out.println("Wo möchtest du deinen Roboter platzieren, " + playerTwo + "? x-Koordinate:");
+                System.out.println("Wo möchtest du deinen Roboter platzieren, " + players[1] + "? x-Koordinate:");
                 roboTwoX = input.nextInt();
                 System.out.println("Und die Y-Koordinate?");
                 roboTwoY = input.nextInt();
@@ -119,8 +117,8 @@ public class Main {
                 System.out.println();
                 y++;
             }
-            System.out.println(playerOne + "'s Roboter (" + avatars[0] + ") befindet sich auf Feld x " + roboOneX + " y " + roboOneY + ".");
-            System.out.println(playerTwo + "'s Roboter (" + avatars[1] + ") befindet sich auf Feld x " + roboTwoX + " y " + roboTwoY + ".");
+            System.out.println(players[0] + "'s Roboter (" + avatars[0] + ") befindet sich auf Feld x " + roboOneX + " y " + roboOneY + ".");
+            System.out.println(players[1] + "'s Roboter (" + avatars[1] + ") befindet sich auf Feld x " + roboTwoX + " y " + roboTwoY + ".");
             maxZuege++;
         }
     }
