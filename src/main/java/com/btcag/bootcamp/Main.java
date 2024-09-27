@@ -13,6 +13,10 @@ public class Main {
     public static int roboOneY = 0;
     public static int roboTwoX = 0;
     public static int roboTwoY = 0;
+    public static int tempRoboOneX = 0;
+    public static int tempRoboOneY = 0;
+    public static int tempRoboTwoX = 0;
+    public static int tempRoboTwoY = 0;
 
     //-----------------------------------------------------------------------Main-------------------------------------------------------------------------------------------------
     public static void main(String[] args) {
@@ -86,25 +90,40 @@ public class Main {
         return avatars;
     }
 
-    //----------------------------------------------------------Spielbretterstellung und Positionierung des Roboters.-----------------------------------------------------
+    //----------------------------------------------------------------------------------------Game--------------------------------------------------------------------------------------
     public static void game() {
         int y = 1;
         int x = 1;
 
         while (maxTurns <= 100) {
-            if (maxTurns % 2 == 0) {
-                System.out.println("Wo möchtest du deinen Roboter platzieren, " + players[0] + "? x-Koordinate:");
-                roboOneX = input.nextInt();
-                System.out.println("Und die Y-Koordinate?");
-                roboOneY = input.nextInt();
+            if (maxTurns > 1) {
+                if (maxTurns % 2 == 0) {
+                    System.out.println("Wo möchtest du deinen Roboter platzieren, " + players[0] + "? x-Koordinate:");
+                    roboOneX = input.nextInt();
+                    System.out.println("Und die Y-Koordinate?");
+                    roboOneY = input.nextInt();
 
+                } else {
+                    System.out.println("Wo möchtest du deinen Roboter platzieren, " + players[1] + "? x-Koordinate:");
+                    roboTwoX = input.nextInt();
+                    System.out.println("Und die Y-Koordinate?");
+                    roboTwoY = input.nextInt();
+                }
+                moveValid();
+                tempRoboOneX = roboOneX;
+                tempRoboOneY = roboOneY;
+                tempRoboTwoX = roboTwoX;
+                tempRoboTwoY = roboTwoY;
             } else {
-                System.out.println("Wo möchtest du deinen Roboter platzieren, " + players[1] + "? x-Koordinate:");
-                roboTwoX = input.nextInt();
-                System.out.println("Und die Y-Koordinate?");
-                roboTwoY = input.nextInt();
+                roboOneX = 1;
+                roboOneY = 1;
+                roboTwoX = 15;
+                roboTwoY = 15;
+                tempRoboOneX = 1;
+                tempRoboOneY = 1;
+                tempRoboTwoX = 15;
+                tempRoboTwoY = 15;
             }
-            moveValid();
 
             y = 1;
             while (y <= 15) {
@@ -136,14 +155,14 @@ public class Main {
 
     //-----------------------------------------------------------Überprüfung auf Möglichkeit des Zuges-------------------------------------------------------------------------
     public static void moveValid() {
-        if (roboOneX > 15 || roboOneY > 15) {
-            System.out.println("Der gewünschte Zug befindet sich nicht auf der Karte. Bitte nochmal ziehen.");
+        if (roboOneX > 15 || roboOneY > 15 || roboOneX > tempRoboOneX + 1 || roboOneY > tempRoboOneY + 1 || roboOneX < tempRoboOneX - 1 || roboOneY < tempRoboOneY - 1) {
+            System.out.println("Der gewünschte Zug ist ungültig. Bitte nochmal ziehen.");
             System.out.println("Wo möchtest du deinen Roboter platzieren, " + players[0] + "? x-Koordinate:");
             roboOneX = input.nextInt();
             System.out.println("Und die Y-Koordinate?");
             roboOneY = input.nextInt();
             moveValid();
-        } else if (roboTwoX > 15 || roboTwoY > 15) {
+        } else if (roboTwoX > 15 || roboTwoY > 15 || roboTwoX > tempRoboTwoX + 1 || roboTwoY > tempRoboTwoY + 1 || roboTwoX < tempRoboTwoX - 1 || roboTwoY < tempRoboTwoY - 1) {
             System.out.println("Der gewünschte Zug befindet sich nicht auf der Karte. Bitte nochmal ziehen.");
             System.out.println("Wo möchtest du deinen Roboter platzieren, " + players[1] + "? x-Koordinate:");
             roboTwoX = input.nextInt();
