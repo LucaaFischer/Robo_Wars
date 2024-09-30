@@ -8,17 +8,19 @@ public class Main {
     public static Scanner input = new Scanner(System.in);
     public static String[] players = getPlayers();
     public static String[] avatars = getAvatars();
-    public static int maxTurns = 0;
-    public static int roboOneX = 0;
-    public static int roboOneY = 0;
-    public static int roboTwoX = 0;
-    public static int roboTwoY = 0;
-    public static int tempRoboOneX = 0;
-    public static int tempRoboOneY = 0;
-    public static int tempRoboTwoX = 0;
-    public static int tempRoboTwoY = 0;
 
-    //-----------------------------------------------------------------------Main-------------------------------------------------------------------------------------------------
+    //Startpositionen für die Roboter
+    public static int maxTurns = 0;
+    public static int roboOneX = 1;
+    public static int roboOneY = 1;
+    public static int roboTwoX = 15;
+    public static int roboTwoY = 15;
+    public static int tempRoboOneX = 1;
+    public static int tempRoboOneY = 1;
+    public static int tempRoboTwoX = 15;
+    public static int tempRoboTwoY = 15;
+
+    //-------------------------------------------------------------------------Main-------------------------------------------------------------------------------------------------
     public static void main(String[] args) {
         String introString = intro();
         System.out.println(introString);
@@ -109,61 +111,28 @@ public class Main {
                     System.out.println("Und die Y-Koordinate?");
                     roboTwoY = input.nextInt();
                 }
-                moveValid();
-                tempRoboOneX = roboOneX;
-                tempRoboOneY = roboOneY;
-                tempRoboTwoX = roboTwoX;
-                tempRoboTwoY = roboTwoY;
-            } else {
-                roboOneX = 1;
-                roboOneY = 1;
-                roboTwoX = 15;
-                roboTwoY = 15;
-                tempRoboOneX = 1;
-                tempRoboOneY = 1;
-                tempRoboTwoX = 15;
-                tempRoboTwoY = 15;
             }
+            moveValid();
+            tempRoboOneX = roboOneX;
+            tempRoboOneY = roboOneY;
+            tempRoboTwoX = roboTwoX;
+            tempRoboTwoY = roboTwoY;
 
-            y = 1;
-            while (y <= 15) {
-                x = 1;
-                while (x <= 15) {
-                    if (x == roboOneX && y == roboOneY) {
-                        System.out.print(" [ " + avatars[0] + " ] ");
-                    } else if (x == roboTwoX && y == roboTwoY) {
-                        System.out.print(" [ " + avatars[1] + " ] ");
-                    } else {
-                        System.out.print(" [   ] ");
-                    }
-                    x++;
-                }
-                System.out.println();
-                System.out.println();
-                y++;
-            }
-            if (roboOneX == roboTwoX && roboOneY == roboTwoY) {
-                System.out.println("AND THE WINNER ISSSSS " + fight_randWinner().toUpperCase());
-                break;
-            } else {
-                System.out.println(players[0] + "'s Roboter (" + avatars[0] + ") befindet sich auf Feld x " + roboOneX + " y " + roboOneY + ".");
-                System.out.println(players[1] + "'s Roboter (" + avatars[1] + ") befindet sich auf Feld x " + roboTwoX + " y " + roboTwoY + ".");
-                maxTurns++;
-            }
+            board();
         }
     }
 
     //-----------------------------------------------------------Überprüfung auf Möglichkeit des Zuges-------------------------------------------------------------------------
     public static void moveValid() {
-        if (roboOneX > 15 || roboOneY > 15 || roboOneX > tempRoboOneX + 1 || roboOneY > tempRoboOneY + 1 || roboOneX < tempRoboOneX - 1 || roboOneY < tempRoboOneY - 1) {
+        if (roboOneX > 15 || roboOneY > 15 || roboOneX < 1 || roboOneY < 1|| roboOneX > tempRoboOneX + 1 || roboOneY > tempRoboOneY + 1 || roboOneX < tempRoboOneX - 1 || roboOneY < tempRoboOneY - 1) {
             System.out.println("Der gewünschte Zug ist ungültig. Bitte nochmal ziehen.");
             System.out.println("Wo möchtest du deinen Roboter platzieren, " + players[0] + "? x-Koordinate:");
             roboOneX = input.nextInt();
             System.out.println("Und die Y-Koordinate?");
             roboOneY = input.nextInt();
             moveValid();
-        } else if (roboTwoX > 15 || roboTwoY > 15 || roboTwoX > tempRoboTwoX + 1 || roboTwoY > tempRoboTwoY + 1 || roboTwoX < tempRoboTwoX - 1 || roboTwoY < tempRoboTwoY - 1) {
-            System.out.println("Der gewünschte Zug befindet sich nicht auf der Karte. Bitte nochmal ziehen.");
+        } else if (roboTwoX > 15 || roboTwoY > 15 || roboTwoX < 1 || roboTwoY < 1 || roboTwoX > tempRoboTwoX + 1 || roboTwoY > tempRoboTwoY + 1 || roboTwoX < tempRoboTwoX - 1 || roboTwoY < tempRoboTwoY - 1) {
+            System.out.println("Der gewünschte Zug ist ungültig. Bitte nochmal ziehen.");
             System.out.println("Wo möchtest du deinen Roboter platzieren, " + players[1] + "? x-Koordinate:");
             roboTwoX = input.nextInt();
             System.out.println("Und die Y-Koordinate?");
@@ -185,6 +154,35 @@ public class Main {
             }
         }
         return winner;
+    }
+
+    //-------------------------------------------------------------Spielfelderstellung------------------------------------------------------------------------------------------
+    public static void board() {
+        int y = 1;
+        int x = 1;
+        while (y <= 15) {
+            x = 1;
+            while (x <= 15) {
+                if (x == roboOneX && y == roboOneY) {
+                    System.out.print(" [ " + avatars[0] + " ] ");
+                } else if (x == roboTwoX && y == roboTwoY) {
+                    System.out.print(" [ " + avatars[1] + " ] ");
+                } else {
+                    System.out.print(" [   ] ");
+                }
+                x++;
+            }
+            System.out.println();
+            System.out.println();
+            y++;
+        }
+        if (roboOneX == roboTwoX && roboOneY == roboTwoY) {
+            System.out.println("AND THE WINNER ISSSSS " + fight_randWinner().toUpperCase());
+        } else {
+            System.out.println(players[0] + "'s Roboter (" + avatars[0] + ") befindet sich auf Feld x " + roboOneX + " y " + roboOneY + ".");
+            System.out.println(players[1] + "'s Roboter (" + avatars[1] + ") befindet sich auf Feld x " + roboTwoX + " y " + roboTwoY + ".");
+            maxTurns++;
+        }
     }
 }
 
