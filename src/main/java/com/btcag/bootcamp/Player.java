@@ -6,6 +6,7 @@ public class Player {
     Scanner input = new Scanner(System.in);
     String playerName = "";
     String playerAvatar = "";
+    int skillPoints = 2;
 
     // ---------------------------------------------------------------- ---------Namenseingabe------------------------------------------------------------------------------------------
     public void getName() {
