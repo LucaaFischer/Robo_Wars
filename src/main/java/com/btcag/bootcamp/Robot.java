@@ -31,9 +31,12 @@ public class Robot {
 
     //-------------------------------------------------------------------Spieler die Stats für Robo festlegen lassen---------------------------------------------------------------
     public void setStats() {
-        String skillStat = "";
-        System.out.println("Was möchtest du skillen?");
-        skillStat = input.nextLine();
+        String skillStat = " ";
+        if (input.hasNext()) {
+            input.next();
+        } else {
+            System.out.println("Was möchtest du skillen?");
+            skillStat = input.nextLine();
             switch (skillStat) {
                 case "hp":
                     this.hp++;
@@ -63,6 +66,7 @@ public class Robot {
                     System.out.println("Ungültiger Stat. Mach nochmal!");
                     setStats();
                     break;
+            }
         }
     }
 }
